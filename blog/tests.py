@@ -32,16 +32,17 @@ class TestMainPage(TestCase):
 
 class TestPostsDataBase(TestCase):
 
-    def setUp(self):
-        post = Post()
-
-    # When Mark wanted to add a post
+    # Когда Марк добавил пост, проверяем успешно ли он к нам пришел
     def test_add_new_post_to_data_base(self):
-        post_number_one = self.post.objects.create(title='Some test', text='Some text')
+        new_mail = {
+            'author': 'Roman',
+            'title': 'Some Title',
+            'text': 'Some Text',
+        }
 
-        self.assertTrue(post_number_one.save(), True)
+        self.client.post(reverse('new_mail_post'), data=new_mail)
 
-
+        self.assertEqual(new_mail['author'], Post.objects.filter(author='Roman').first().author)
 # orm notes for roman:
 # object = model(param='x', param='x')
 # object.save()
