@@ -1,0 +1,12 @@
+<form method="post"> {% csrf_token %}
+    <p>Author</p>
+    <textarea name="author"></textarea>
+
+    <p>Title</p>
+    <textarea name="title"></textarea>
+
+    <p>Text</p>
+    <textarea name="text"></textarea>
+
+    <button type="submit">Publish!</button>
+</form>

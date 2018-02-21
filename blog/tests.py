@@ -30,7 +30,7 @@ class TestMainPage(TestCase):
         self.assertIn('<title>Hello World</title>', get_html_text)
 
 
-class TestPostsDataBase(TestCase):
+class TestPostDataBase(TestCase):
 
     # Когда Марк добавил пост, проверяем успешно ли он к нам пришел
     def test_add_new_post_to_data_base(self):
@@ -43,6 +43,8 @@ class TestPostsDataBase(TestCase):
         self.client.post(reverse('new_mail_post'), data=new_mail)
 
         self.assertEqual(new_mail['author'], Post.objects.filter(author='Roman').first().author)
+
+
 # orm notes for roman:
 # object = model(param='x', param='x')
 # object.save()
