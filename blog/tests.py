@@ -33,7 +33,7 @@ class TestMainPage(TestCase):
 class TestPostsDataBase(TestCase):
 
     def setUp(self):
-        self.post = Post()
+        post = Post()
 
     # When Mark wanted to add a post
     def test_add_new_post_to_data_base(self):
@@ -41,3 +41,9 @@ class TestPostsDataBase(TestCase):
 
         self.assertTrue(post_number_one.save(), True)
 
+
+# orm notes for roman:
+# object = model(param='x', param='x')
+# object.save()
+
+# or create()
