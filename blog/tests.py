@@ -31,6 +31,14 @@ class TestMainPage(TestCase):
 
         self.assertIn('<title>Hello World</title>', get_html_text)
 
+    # Когда марк заходит по url('/post/1/') он видит страницу с определенным постом
+    def test_when_user_wont_open_post_detail(self):
+        response = self.c.get(reverse('post_detail'))
+
+        get_html_text = response.content.decode('utf8')
+
+        self.assertIn('<title>Post Detail</title>', get_html_text)
+
 
 class TestPostDataBase(TestCase):
 
