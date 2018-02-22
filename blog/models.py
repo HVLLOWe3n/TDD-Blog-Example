@@ -1,16 +1,16 @@
 from django.db import models
-from django.utils import timezone
+from datetime import datetime
 
 
 class Post(models.Model):
     author = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
     text = models.TextField()
-    create_date = models.DateTimeField(default=timezone.datetime.now)
+    create_date = models.DateTimeField(default=datetime.now)
     # published_date = models.DateTimeField(default=timezone.datetime.now)
 
-    def publish(self):
-        self.published_date = timezone.now()
+    # def publish(self):
+    #   self.published_date = timezone.now()
 
     def __str__(self):
         return self.title

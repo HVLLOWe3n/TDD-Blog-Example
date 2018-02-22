@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.test.client import Client
 from django.urls import reverse
 
+from datetime import datetime
+
 from .models import Post
 
 
@@ -38,6 +40,7 @@ class TestPostDataBase(TestCase):
             'author': 'Roman',
             'title': 'Some Title',
             'text': 'Some Text',
+            'date': datetime.now()
         }
 
         self.client.post(reverse('new_mail_post'), data=new_mail)
