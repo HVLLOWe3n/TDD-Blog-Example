@@ -55,6 +55,8 @@ class TestPostDataBase(TestCase):
         get_text_html = response.content.decode('utf8')
 
         self.assertIn(Post.objects.filter(author='Roman').first().title, get_text_html)
+        self.assertIn(Post.objects.filter(author='Roman').first().author, get_text_html)
+        self.assertIn(Post.objects.filter(author='Roman').first().text, get_text_html)
 
 
 # orm notes for roman:
