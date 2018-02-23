@@ -1,2 +1,7 @@
 <title>Main Page</title>
 
+{% for p in posts %}
+    <p>{{ p.title }}</p>
+    <p>{{ p.author }}</p>
+    <p>{{ p.text }}</p>
+{% endfor %}

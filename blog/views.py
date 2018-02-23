@@ -9,7 +9,7 @@ from .models import Post
 
 
 def main_page(request):
-    posts = Post.objects.filter(create_date__lte=datetime.now()).order_by('-create_date')
+    posts = Post.objects.filter(published_date__lte=datetime.now()).order_by('-create_date')
 
     context = {'posts': posts}
 

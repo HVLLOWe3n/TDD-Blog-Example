@@ -19,7 +19,7 @@ class TestMainPage(TestCase):
 
     # When a Mark go to url ('/') 200 code status back
     def test_go_to_root_url_main_page_view(self):
-        response = self.c.get(reverse('main_page'))         # Get object request
+        response = self.c.get(reverse('post_list'))         # Get object request
 
         self.assertEqual(response.status_code, 200)         # equal
 
@@ -32,7 +32,7 @@ class TestMainPage(TestCase):
         self.assertIn('<title>Main Page</title>', get_html_text)
 
 
-class TestPostDataBase(TestCase):
+class TestPostWithDataBase(TestCase):
     def setUp(self):
         Post.objects.create(author='Roman', title='Title', text='Text')
         Post.objects.create(author='Alex', title='Title 1', text='Text 1')
@@ -43,7 +43,8 @@ class TestPostDataBase(TestCase):
             'author': 'Roman',
             'title': 'Some Title',
             'text': 'Some Text',
-            'date': datetime.now()
+            'date': datetime.now(),
+            'publish_date': datetime.now(),
         }
 
         self.client.post(reverse('new_mail_post'), data=new_mail)
