@@ -31,14 +31,6 @@ class TestMainPage(TestCase):
 
         self.assertIn('<title>Hello World</title>', get_html_text)
 
-    # Когда марк заходит по url('/post/1/') он видит страницу с определенным постом
-    def test_when_user_wont_open_post_detail(self):
-        response = self.c.get(reverse('post_detail'))
-
-        get_html_text = response.content.decode('utf8')
-
-        self.assertIn('<title>Post Detail</title>', get_html_text)
-
 
 class TestPostDataBase(TestCase):
 
@@ -54,6 +46,15 @@ class TestPostDataBase(TestCase):
         self.client.post(reverse('new_mail_post'), data=new_mail)
 
         self.assertEqual(new_mail['author'], Post.objects.filter(author='Roman').first().author)
+
+    # Когда марк заходит по url('/post/1/') он видит страницу с определенным постом
+    def test_when_user_wont_open_post_detail(self):
+        Post.objects.create(author='Roman', title='Title', text='text')
+
+        response = self.client.get(reverse('post_detail', kwargs={'pk': 1}))
+        get_text_html = response.content.decode('utf8')
+
+        self.assertIn(Post.objects.filter(author='Roman').first().title, get_text_html)
 
 
 # orm notes for roman:

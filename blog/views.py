@@ -30,3 +30,13 @@ class New_Post(View):
             p.save()
 
         return render(request, 'blog/post_new.html', context)
+
+
+def post_detail(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    context = {
+        'post_info': post
+    }
+
+    return render(request, 'blog/post_detail.html', context)
