@@ -2,12 +2,18 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 
+from datetime import datetime
+
 from .forms import PostForm
 from .models import Post
 
 
 def main_page(request):
-    return render(request, 'blog/base.html')
+    posts = Post.objects.filter(create_date__lte=datetime.now()).order_by('-create_date')
+
+    context = {'posts': posts}
+
+    return render(request, 'blog/post_list.html', context)
 
 
 class New_Post(View):
