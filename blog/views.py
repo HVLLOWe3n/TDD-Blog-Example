@@ -1,10 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 
 from datetime import datetime
 
-from .forms import PostForm
+from blog.forms import PostForm
 from .models import Post
 
 
@@ -34,6 +34,7 @@ class New_Post(View):
 
             p = Post(author=author, title=title, text=text)
             p.save()
+            return redirect('/')
 
         return render(request, 'blog/post_new.html', context)
 
