@@ -49,10 +49,7 @@ class TestPostWithDataBase(TestCase):
 
         self.client.post(reverse('new_mail_post'), data=new_mail)
 
-        if Post.objects.filter(author=new_mail['author']).exists():
-            self.assertEqual(new_mail['title'], Post.objects.filter(title=new_mail['title']).first().title)
-        else:
-            self.assertEqual(new_mail['author'], Post.objects.filter(author=new_mail['author']).first().author)
+        self.assertTrue(Post.objects.filter(id=3).exists(), True)
 
     # Когда марк заходит по URL('/post/1/') он видит страницу с определенным постом
     def test_when_user_wont_open_post_detail(self):
