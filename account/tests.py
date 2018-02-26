@@ -23,10 +23,13 @@ class AccountTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(user_data['username'], mark.username)
-        # self.assertTrue(request.user.is_authenticated())
+        # self.assertTrue(request.user.is_authenticated()) - Roman
+        # this is used to check if a user is logged in (among other things), it is designed to always return true - Alexander
+        # it does not imply a set of user permissions. If after the registration the user is 'logged in' you can
+        # leave this line in here to check that the 'login flow' works correctly.
 
     # When Mark wants to log in
-    def test_when_user_wont_to_sign_in(self):
+    def test_when_user_want_to_sign_in(self):
         user_data = {
             'username': 'Zuck',
             'password': 'MySimplePassword',
