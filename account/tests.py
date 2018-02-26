@@ -11,14 +11,27 @@ class AccountTest(TestCase):
     # When Mark wants to register
     def test_when_user_wants_to_sign_up(self):
         user_data = {
-            'firstname': 'Mark',
-            'lastname': 'Zuckerberg',
+            'first_name': 'Mark',
+            'last_name': 'Zuckerberg',
             'username': 'Zuck',
             'email': 'Zuck@gmail.com',
             'password': 'MySimplePassword',
         }
 
         response = self.c.post(reverse('sign_up'), data=user_data)
+        mark = User.objects.get(username=user_data['username'])
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(user_data['email'], User.objects.get(email=user_data['email']).email)
+        self.assertEqual(user_data['username'], mark.username)
+        # self.assertTrue(request.user.is_authenticated())
+
+    # When Mark wants to log in
+    def test_when_user_wont_to_sign_in(self):
+        user_data = {
+            'username': 'Zuck',
+            'password': 'MySimplePassword',
+        }
+
+        response = self.c.post(reverse('sign_in'), data=user_data)
+
+        self.assertTrue(response.status_code, 200)
